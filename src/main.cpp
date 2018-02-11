@@ -286,7 +286,7 @@ int main() {
 
                                             side_car_s += ((double) prev_size * .02 * side_speed);
 
-                                            if ((side_car_s > car_s) && (side_car_s - car_s) < 30) {
+                                            if ((side_car_s < car_s) && (car_s - side_car_s) < 15) {
                                                 lane = 1;
                                             }
 
@@ -308,8 +308,8 @@ int main() {
 
                                             side_car_s += ((double) prev_size * .02 * side_speed);
 
-                                            if ((side_car_s > car_s) && (side_car_s - car_s) < 30) {
-                                                lane = 1;
+                                            if ((side_car_s < car_s) && (car_s - side_car_s) < 15) {
+                                                lane = 0;
                                             }
 
                                         }
