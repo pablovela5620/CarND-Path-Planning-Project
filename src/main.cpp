@@ -243,13 +243,14 @@ int main() {
                     /*Sensor Fusion Code
                     and more*/
 
+                    // Add previous path to new path
                     if (prev_size > 0) {
                         car_s = end_path_s;
                     }
 
+
                     bool too_close = false;
 
-                    //find ref_v to use
                     for (int i = 0; i < sensor_fusion.size(); ++i) {
                         //car is in my lane [i] is the ith car, [6] is the d value which is what lane it's in
                         float d = sensor_fusion[i][6];
@@ -328,8 +329,6 @@ int main() {
                     /*Sensor Fusion Code
                     and more*/
 
-                    // TODO: define a path made up of (x,y) points that the car will visit sequentially every .02 seconds
-
                     //Create a list of widely spaced (x,y) waypoints, evenly spaced at 30m
                     // later we will interpolate these waypoints with a spline and fill it in with more points that control speed
                     vector<double> ptsx;
@@ -391,11 +390,11 @@ int main() {
                     ptsy.push_back(next_wp2[1]);
 
                     //print points for debugging
-                    cout << ptsx.size() << endl;
-                    for (int i = 0; i < ptsx.size(); ++i) {
-                        cout << "ptsx " << ptsx[i] << endl;
-                        cout << "ptsy " << ptsy[i] << endl;
-                    }
+//                    cout << ptsx.size() << endl;
+//                    for (int i = 0; i < ptsx.size(); ++i) {
+//                        cout << "ptsx " << ptsx[i] << endl;
+//                        cout << "ptsy " << ptsy[i] << endl;
+//                    }
                     //print points for debugging
 
 
@@ -470,7 +469,6 @@ int main() {
 
                     }
 
-                    //TODO: END
 
                     json msgJson;
 

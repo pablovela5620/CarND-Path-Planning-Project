@@ -64,7 +64,21 @@ the path has processed since last time.
 
 A really helpful resource for doing this project and creating smooth trajectories was using http://kluge.in-chemnitz.de/opensource/spline/, the spline function is in a single hearder file is really easy to use.
 
----
+## Reflection - Path Generation
+
+This project generates path for the car to take in the following way
+
+1. First, a list of sparsely placed way points (x,y) is created, each spaced at 30m apart.
+2. The reference x, y, and yaw states for the car are obtained and depending on the size of the previous path will be used as the starting point for path generation.
+3. If the previous path has less than two points, the car will be used as the starting reference by creating two points that make a path tangent to the car. Else if the previous path had more then two or more points left, then we use those two points as the starting reference. 
+4. Once we have the first two starting points, we add three more points using the getXY function as to add them in the Frenet coordinate system, each spaced 30m apart. 
+5. To help simplify the math required for the next portion of path generation we change from global coordinates to the local car coordinates. We do this by making the cars current location 0 and its angle relative to the world 0.
+6. To help with having a smooth generated path we create a spline to create a smooth path, using a downloaded header file, from the points we had previously defined. 
+7. Once we have defined a spline based on those points, we generate a path that consists of 50 points based on the generated spline.
+8. To ensure we respect the maximum allowed jerk, we use a chosen velocity to increment or decrement speed by 0.224 m/s when calculating the distance between spline points.
+9. The points found in the spline are added to the simulators waypoints and used to generate the path
+10. A list called sensor fusion that includes all the cars around our car to ensure we don't collide with a car going slower then us in front of us and to allow for lane changes
+
 
 ## Dependencies
 
